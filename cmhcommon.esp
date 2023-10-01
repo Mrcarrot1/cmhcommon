@@ -1,0 +1,26 @@
+//cmhcommon rolling
+//Information for esp package manager.
+ESP_PACKAGE
+{
+    name = cmhcommon
+    description = cmhcommon library of useful functions
+    type = Git //Can be Git, Tarball, or Other
+    version = rolling
+    cloneURL = https:\//github.com/Mrcarrot1/cmhcommon.git
+    updateURL = https:\//raw.githubusercontent.com/Mrcarrot1/cmhcommon/main/cmhcommon.esp
+    BUILD_COMMANDS
+    [
+	make -j $THREADS
+    ]
+    INSTALL_COMMANDS
+    [
+	sudo make install
+    ]
+    UNINSTALL_COMMANDS
+    [
+	sudo rm /usr/include/cmh-buffer-utils.h
+	sudo rm /usr/include/cmh-string-utils.h
+	sudo rm /usr/include/cmh-collections.h
+	sudo rm /usr/lib/libcmhcommon.so
+    ]
+}
