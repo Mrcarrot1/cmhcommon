@@ -1,24 +1,24 @@
 CC=cc
 CFLAGS=-std=c2x -O3 -Wall -Wextra -fPIC
 
-all: string-utils buffer-utils collections
+all: build/string-utils.o build/buffer-utils.o build/collections.o
 	$(CC) $(CFLAGS) -shared build/*.o -o libcmhcommon.so
 
-string-utils: prepare
+build/string-utils.o: src/string-utils.c
 	$(CC) $(CFLAGS) -c src/string-utils.c -o build/string-utils.o
 
-buffer-utils: prepare
+build/buffer-utils.o: src/buffer-utils.c
 	$(CC) $(CFLAGS) -c src/buffer-utils.c -o build/buffer-utils.o
 
-collections: prepare
+build/collections.o: src/collections.c
 	$(CC) $(CFLAGS) -c src/collections.c -o build/collections.o
 
 install: all
 	cp include/* /usr/include
 	cp libcmhcommon.so /usr/lib
 
-prepare: clean
-	mkdir build
+prepare: 
+	if [ ! -d build]; then mkdir build; fi
 
 clean:
 	rm -rf build
